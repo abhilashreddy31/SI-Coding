@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+//1.        
+function createUniqueCounter() {
+  let count = 0;
+
+  return {
+    increment: function() {
+      count++;
+      return count;
+    },
+    getValue: function() {
+      return count;
+    }
+  };
+}
+
+const counter1 = createUniqueCounter();
+const counter2 = createUniqueCounter();
+
+console.log(counter1.increment()); 
+console.log(counter1.increment()); 
+console.log(counter1.getValue());   
+
+console.log(counter2.increment()); 
+console.log(counter2.getValue());   
+console.log(counter2.increment()); 
+  
+
+//2.
+function processObjectsDelayed(objects, delay) {
+  for (let i = 0; i < objects.length; i++) {
+      setTimeout(function() {
+        objects[i].process();
+      }, delay);
+  }
+}
+
+const items = [
+{ name: "Alpha", process: function() { console.log(`Processing: ${this.name}`); } },
+{ name: "Beta", process: function() { console.log(`Task for ${this.name} done.`); } }
+];
+
+processObjectsDelayed(items, 1000); 
+
+//3.
+function filterObjectProperties(obj, minLength) {
+  const result = {};
+
+  for (let key in obj) {
+    if (typeof obj[key] === "string" && obj[key].length >= minLength) {
+      result[key] = obj[key];
+    }
+  }
+
+  return result;
+}
+
+const data = { a: "short", b: "longer string", c: 123, d: "very long string indeed" };
+const filtered = filterObjectProperties(data, 6);
+console.log(filtered); 
+
+    </script>
+</body>
+</html>
